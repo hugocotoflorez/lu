@@ -1,0 +1,7 @@
+inc lio
+
+int main(da argc)
+{
+        for (str s: argc)
+                printf("%s", s);
+}
