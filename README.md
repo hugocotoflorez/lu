@@ -1,14 +1,17 @@
 # Lu Specification
 
-## About Lu is a language designed to be used in microcontrollers and stuff
-like that where it is more important the control than the security. It looks
-like C because I love C but I want to be a bit closer to the device and have
-some abstractions.
+## About
+Lu is a language designed to be used in microcontrollers and stuff like that
+where it is more important the control than the security. It looks like C
+because I love C but I want to be a bit closer to the device and have some
+abstractions.
 
-## disclaimer As you can see nowadays lu is just a bunch of rules and ideas. I
-plan to have a beta version in September 2025.
+## disclaimer
+As you can see nowadays lu is just a bunch of rules and ideas. I plan to have
+a beta version in September 2025.
 
-## Using libc It can. (todo: specification)
+## Using libc
+It can. (todo: specification)
 
 ## types
 
