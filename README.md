@@ -23,6 +23,8 @@ It can. (todo: specification)
 - `int` -> signed non decimal num
 - `uint` -> unsigned int
 
+- `type` -> a type
+
 - `da` -> dynamic array
 - `hm` -> hash map
 - `ll` -> double linked list
@@ -31,12 +33,15 @@ It can. (todo: specification)
 
 
 ## Keywords
-### local
-if a function is declared as local, it is only visible for functions in the same file.
-It is possible to use the same function name in other files if those functions are also
-declared as local.
+### global / export
+If a function is declared as global / export (I have to decide the name) it can
+be used from other files that include the file in which it is declared.
+Otherwise it is only visible for the files in the same file and its name can be
+used in other non-global function from other files.
+
 ```c
-local none foo() {};
+global none foo() {};
+export none foo() {};
 ```
 
 ### zero
@@ -80,4 +85,17 @@ f: for (){
         break f;
     }
 }
+```
+
+## STR
+str is a pointer to a str-struct at the offset there data starts. It works as a dynamic array. The data ends with a null
+terminated character to be compatible with C. The str struct has some methods related to strings.
+```c
+struct str_struct {
+        uint capacity;
+        uint length;
+        char data;
+    };
+
+type str = str_struct + offset(str_struct.data);
 ```
