@@ -1,7 +1,8 @@
 inc lio
 
-int main(da argc)
+main(da argc)
 {
         for (str s: argc)
                 printf("%s", s);
+        0
 }

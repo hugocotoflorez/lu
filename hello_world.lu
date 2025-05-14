@@ -1,8 +1,7 @@
-inc lio // lu standard library IO ~ le io
+inc lio  // lou IO
 
-int
 main(none)
 {
         printf("Hello, World");
-        return 0;
+        0
 }
