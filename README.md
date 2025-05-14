@@ -1,5 +1,5 @@
-![lu logo dark](./logo-dark.png)
-![lu logo light](./logo-light.png)
+<img src="./logo-dark.png" alt="logo-dark" width=50%/>
+<img src="./logo-light.png" alt="logo-light" width=50%/>
 
 # Lu Specification
 
