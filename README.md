@@ -1,6 +1,6 @@
-<div style="display: flex; gap: 10px;">
-  <img src="./logo-dark.png" alt="logo-dark" width=40%>
-  <img src="./logo-light.png" alt="logo-light" width=40%>
+<div style="display: flex; gap: 0px;">
+  <img src="./logo-dark.png" alt="logo-dark" width=50%>
+  <img src="./logo-light.png" alt="logo-light" width=50%>
 </div>
 
 # Lu Specification
