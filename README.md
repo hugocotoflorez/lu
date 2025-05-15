@@ -95,7 +95,7 @@ zero raw b[10];
 ```
 
 ### defer
-Store the statement in a LIFO queue and execute it while the end of the scope
+Store the statement in a LIFO queue and execute it when the end of the scope
 in which the defer is set is reached.
 ```c
 { <- start of the scope
@@ -165,3 +165,30 @@ struct str_struct {
 
 type str = str_struct + offset(str_struct.data);
 ```
+
+
+## Iterators
+
+Every struct with a `T current` field and a `T2 next(self)` funtion can be
+used as an iterator. `current` can be of any type and have to store the needed
+info to calculate next value. `next` have to return the next element and
+update `current` until `null` is returned.
+
+```c
+struct array<T> {
+    zero int current;
+    T *next(self) = { current++ }
+    zero int size, capacity;
+    zero data;
+}
+
+array A;
+for (a :: A) {
+    do something
+}
+
+```
+
+
+
+
