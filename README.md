@@ -15,9 +15,6 @@ abstractions.
 As you can see nowadays lu is just a bunch of rules and ideas. I plan to have
 a beta version in September 2025.
 
-## Using libc
-It can. (todo: specification)
-
 ## functions
 A function is on the form of `type name ( arg1, arg2, arg3,...) { body }`.
 name have to follow `[a-zA-Z_][a-zA-Z_0-9]*` format. The space between name
@@ -190,5 +187,18 @@ for (a :: A) {
 ```
 
 
+## External modules
 
+### imp
+import a lu file. All export functions and definitions are avaliable.
 
+### extern
+say the compiler that a function or definition with a given schema would exist.
+
+### link
+Link the program with a runtime library
+
+```c
+extern printf(const char*, ...);
+link glibc;
+```
