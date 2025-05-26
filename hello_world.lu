@@ -1,4 +1,4 @@
-inc lio  // lou IO
+import libc.stdio; // printf definition
 
 main(none)
 {

@@ -3,6 +3,9 @@
 <img src="./logo-dark.png" alt="logo-dark" width=49%>
 </div>
 
+> The limits of my language are the limits of my word.
+> --- Ludwig Wittgenstein
+
 # Lu Specification
 
 ## About
@@ -21,7 +24,8 @@ name have to follow `[a-zA-Z_][a-zA-Z_0-9]*` format. The space between name
 and parenthesis is not neded. The arguments are in the form `type name [=
 default]`. The `...` points is to say that more arguements can be provided. If
 a unknown number of arguemts can be provided use arrays or some data structure
-that fits better. The function body have its own scope.
+that fits better. The function body have its own scope. Main function have to
+return int so the type can be not provided.
 
 ```c
 none say_hello(str name) {
@@ -58,8 +62,8 @@ int d = -1023;
 uint e = 1023;
 
 da<int> f = [a, b, e];
-hm<int> g = ["house":1, "me":10];
-ll<str> h = ["hello", "world"];
+hm<int> g = {"house":1, "me":10};
+ll<str> h = {"hello", "world"};
 
 struct i{
     int a = 10; // default value on initialization
@@ -69,6 +73,18 @@ struct i{
 
 ptr j = &i;
 i.a == j.a;
+```
+
+### Stack constant length arrays
+
+something like a dynamic array but with a constant size.
+
+```c
+int[10] arr; // array of 10 ints
+arr.count; // number of elements of array
+// indexing
+arr[0] = 0; // can segv
+arr.at(0) = 0; // check for oob
 ```
 
 ## comments
@@ -137,6 +153,19 @@ panik("Some error");
 ## Some strange behaviour
 if a {,} pair ends with a statement without ; it returns its value.
 
+## Loops
+
+- while(condition) {}: Execute statement until condition is false
+- for(variable :: iterator) {}: Execute statement once per element in iterator
+- for(*c like*) {}: Execute statement as c for loop
+- do {} while(condition); : Execute statement once and until condition is false
+- loop {}: Execute until a manual break.
+
+### range
+
+`for (i :: S ... E .. T)){}` Range return a iterator from start S to end E
+with step T. `.. T` can be ignored, the default step is `1`.
+
 ## Loop labels
 In the case where two o more loops are nested, it would be needed to break
 other different than the last loop. It can be solved using loop labels. also
@@ -151,8 +180,9 @@ f: for (){
 ```
 
 ## STR
-str is a pointer to a str-struct at the offset there data starts. It works as a dynamic array. The data ends with a null
-terminated character to be compatible with C. The str struct has some methods related to strings.
+str is a pointer to a str-struct at the offset there data starts. It works as a
+dynamic array. The data ends with a null terminated character to be compatible
+with C. The str struct has some methods related to strings.
 ```c
 struct str_struct {
         uint capacity;
@@ -189,7 +219,7 @@ for (a :: A) {
 
 ## External modules
 
-### imp
+### import
 import a lu file. All export functions and definitions are avaliable.
 
 ### extern
@@ -199,6 +229,48 @@ say the compiler that a function or definition with a given schema would exist.
 Link the program with a runtime library
 
 ```c
-extern printf(const char*, ...);
 link glibc;
+extern printf(const char*, ...);
 ```
+
+#### Given libc prototypes
+There is a section that can be included that provide external definitions for
+libc functions and automatically link with libc. Note that it can only be used
+in environments where libc is avaliable.
+
+```c
+import libc.stdio;
+```
+
+## Operators
+### <> Diamond operator
+Diamond operator: `<>` is used to swap the values of two variables of the same
+type or compatible ones.
+```c
+int a = 10;
+int b = 5;
+a <> b; // a is 5 and b is 10
+```
+
+## Thread-safe blocks
+To think about. I think its a good idea but thread_safe is a name that I dont
+like.
+```c
+none shared_method(){
+    thread_safe{
+        some_var+=1;
+    }
+}
+```
+
+## Slices
+A pointer and a size. Array are slices. A slice that does not point to the
+start of an array represents a part of the array.
+- Syntaxis: (ptr)\[offset, elems]. ptr can be another slice.
+
+```c
+int[10] a;
+int[] b = a[1,8];
+```
+
+

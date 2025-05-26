@@ -1,0 +1,16 @@
+import clib.stdio;
+
+main(da args)
+{
+        int n = args.at(0);
+        // assume that n > 0
+        int a = 1;
+        int b = 1;
+        int c;
+        while(n--) {
+                printf("%d\n", a);
+                b <> a; // b=a and a=b
+                b += a;
+        }
+
+}

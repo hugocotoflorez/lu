@@ -1,4 +1,4 @@
-inc lio
+import libc.stdio; // printf definition
 
 main(da argc)
 {
