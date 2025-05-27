@@ -1,8 +1,9 @@
-import clib.stdio;
+import libc.stdio;
 
-main(da args)
+main(args[])
 {
-        int n = args.at(0);
+        assert args.count >= 1
+        int n = args[1];
         // assume that n > 0
         int a = 1;
         int b = 1;
@@ -12,5 +13,4 @@ main(da args)
                 b <> a; // b=a and a=b
                 b += a;
         }
-
 }

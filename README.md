@@ -61,7 +61,7 @@ ptr c = &a; // address of a
 int d = -1023;
 uint e = 1023;
 
-da<int> f = [a, b, e];
+da<int> f = [a, b, e]; ??? just use slices
 hm<int> g = {"house":1, "me":10};
 ll<str> h = {"hello", "world"};
 
@@ -75,25 +75,16 @@ ptr j = &i;
 i.a == j.a;
 ```
 
-### Stack constant length arrays
-
-something like a dynamic array but with a constant size.
-
-```c
-int[10] arr; // array of 10 ints
-arr.count; // number of elements of array
-// indexing
-arr[0] = 0; // can segv
-arr.at(0) = 0; // check for oob
-```
-
 ## comments
-todo
+Just as int C I think.
 
 ## Keywords
 
 ### export
-If a function is declared as export it can be used from other files thatinclude the file in which it is declared. Otherwise it is only visible for thefiles in the same file and its name can be used in other non-global functionfrom other files.
+If a function is declared as export it can be used from other files thatinclude
+the file in which it is declared. Otherwise it is only visible for thefiles in
+the same file and its name can be used in other non-global functionfrom other
+files.
 
 ```c
 export none foo() {};
@@ -142,7 +133,7 @@ A a;
 a.foo(10) ---> foo(a, 10)
 ```
 
-### todo, panik, unreachable
+### todo, panik, unreachable, abort
 Those functions terminate the program execution with a diagnostic of where it
 is called and a message from the user.
 ```c
@@ -163,8 +154,8 @@ if a {,} pair ends with a statement without ; it returns its value.
 
 ### range
 
-`for (i :: S ... E .. T)){}` Range return a iterator from start S to end E
-with step T. `.. T` can be ignored, the default step is `1`.
+`for (i :: S ... E .. T)){}` evaluates the range from start S to end E with
+step T. `.. T` can be ignored, the default step is `1`.
 
 ## Loop labels
 In the case where two o more loops are nested, it would be needed to break
@@ -180,6 +171,9 @@ f: for (){
 ```
 
 ## STR
+`TODO: just a array, dynaically allocated if defined as dynamic string or
+something like that`
+
 str is a pointer to a str-struct at the offset there data starts. It works as a
 dynamic array. The data ends with a null terminated character to be compatible
 with C. The str struct has some methods related to strings.
@@ -195,6 +189,8 @@ type str = str_struct + offset(str_struct.data);
 
 
 ## Iterators
+
+`TODO: I think it is not a good idea`
 
 Every struct with a `T current` field and a `T2 next(self)` funtion can be
 used as an iterator. `current` can be of any type and have to store the needed
@@ -270,7 +266,17 @@ start of an array represents a part of the array.
 
 ```c
 int[10] a;
-int[] b = a[1,8];
+int[] b = a[1,8]; // b is constant size, determined at compile time
 ```
+
+The size of a slice is constant by default. If it is set as dynamic it can
+grow, at the cost that is allocated in the heap. It would work as an dynamic array.
+
+```c
+int[-] a; // set as dynamic
+a[100] = 1; // now a has size > 100
+```
+I have 3 options, `int[<some char>]`, `int[dynamic]`, `dynamic int[]` I have to
+think about what I like more.
 
 

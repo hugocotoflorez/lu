@@ -1,8 +1,8 @@
 import libc.stdio; // printf definition
 
-main(da argc)
+main(args[])
 {
-        for (str s: argc)
+        for (str s: args)
                 printf("%s", s);
         0
 }
