@@ -279,4 +279,17 @@ a[100] = 1; // now a has size > 100
 I have 3 options, `int[<some char>]`, `int[dynamic]`, `dynamic int[]` I have to
 think about what I like more.
 
+## VA ARGS
+
+I think it would be possible to pass vaargs as an slice of pointer, so it can
+be passed recursively as an array but if accessing a slice position it automatically
+dereference it. It can be a generic-slice or something like that.
+
+```c
+int @a [] = {1, 'a', "hello", 0x92A};
+```
+
+`@x` is the address of variable `x`, but it can only be read by value. It can be
+cast explicity. It can be used in function as `func(ptr @a)`, so a is a pointer
+in the way that it can be read as `int i = a`. Idk if this is useful
 
